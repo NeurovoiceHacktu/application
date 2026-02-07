@@ -1,5 +1,6 @@
 import 'package:application/core/constants/strings.dart';
 import 'package:application/core/constants/text_styles.dart';
+import 'package:application/shared/widgets/conversation_card.dart';
 import 'package:application/shared/widgets/daily_tip_card.dart';
 import 'package:application/shared/widgets/face_test_card.dart';
 import 'package:application/shared/widgets/streak_card.dart';
@@ -31,6 +32,9 @@ class HomeView extends StatelessWidget {
           const SizedBox(height: 20),
 
           VoiceTestCard(onTap: () => viewModel.startVoiceTest(context)),
+          const SizedBox(height: 20),
+
+          ConversationCard(),
           const SizedBox(height: 20),
 
           FaceTestCard(onTap: () => viewModel.startFaceTest(context)),

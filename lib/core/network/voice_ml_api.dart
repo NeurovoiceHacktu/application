@@ -10,6 +10,19 @@ class VoiceMlApi {
       'https://neurovoice-level1-ml.onrender.com';
   static const String _endpoint = '/predict';
 
+  Future<void> uploadConversation(String path) async {
+  final request = http.MultipartRequest(
+    'POST',
+    Uri.parse('https://neurovoice-level1-ml.onrender.com/predict'),
+  );
+
+  request.files.add(
+    await http.MultipartFile.fromPath('file', path),
+  );
+
+  await request.send();
+}
+
   static Future<Map<String, dynamic>> uploadWav({
     required String wavPath,
 

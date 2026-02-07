@@ -9,6 +9,8 @@
       "dependencies": [
         "cupertino_icons",
         "flutter",
+        "flutter_tts",
+        "google_generative_ai",
         "http",
         "http_parser",
         "path_provider",
@@ -46,6 +48,14 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "flutter_tts",
+      "version": "4.2.5",
+      "dependencies": [
+        "flutter",
+        "flutter_web_plugins"
       ]
     },
     {
@@ -245,6 +255,13 @@
         "stream_channel",
         "string_scanner",
         "term_glyph"
+      ]
+    },
+    {
+      "name": "flutter_web_plugins",
+      "version": "0.0.0",
+      "dependencies": [
+        "flutter"
       ]
     },
     {
@@ -590,13 +607,6 @@
       ]
     },
     {
-      "name": "flutter_web_plugins",
-      "version": "0.0.0",
-      "dependencies": [
-        "flutter"
-      ]
-    },
-    {
       "name": "fixnum",
       "version": "1.1.1",
       "dependencies": []
@@ -630,6 +640,13 @@
       "name": "vm_service",
       "version": "15.0.2",
       "dependencies": []
+    },
+    {
+      "name": "google_generative_ai",
+      "version": "0.4.7",
+      "dependencies": [
+        "http"
+      ]
     }
   ],
   "configVersion": 1
