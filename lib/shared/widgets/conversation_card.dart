@@ -8,7 +8,7 @@ class ConversationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async => Navigator.push(context, MaterialPageRoute(builder: (_) => const ConversationView())),
+      onTap: () async => Navigator.push(context, MaterialPageRoute(builder: (_) => const ConversationDemoView())),
       borderRadius: BorderRadius.circular(20),
       child: Container(
         height: 140,

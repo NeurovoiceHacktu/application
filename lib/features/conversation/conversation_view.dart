@@ -1,4 +1,5 @@
 import 'package:application/features/conversation/conversation_viewmodel.dart';
+import 'package:application/features/conversation/voice_result_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +23,15 @@ class _ConversationDemoViewState extends State<ConversationDemoView> {
             _started = true;
             WidgetsBinding.instance.addPostFrameCallback((_) {
               vm.start();
+            });
+          }
+
+          if (vm.state == ConversationState.finished) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const FakeVoiceResultView()),
+              );
             });
           }
 
@@ -104,12 +114,7 @@ class _ConversationDemoViewState extends State<ConversationDemoView> {
 
 /* ===================== ENUM ===================== */
 
-enum ConversationDemoStatus {
-  idle,
-  speaking,
-  listening,
-  finished,
-}
+enum ConversationDemoStatus { idle, speaking, listening, finished }
 
 /* ===================== PROGRESS BAR ===================== */
 
@@ -128,9 +133,7 @@ class ProgressBar extends StatelessWidget {
           height: 6,
           width: index == step ? 32 : 8,
           decoration: BoxDecoration(
-            color: index <= step
-                ? Colors.blue
-                : Colors.blue.withOpacity(0.25),
+            color: index <= step ? Colors.blue : Colors.blue.withOpacity(0.25),
             borderRadius: BorderRadius.circular(8),
           ),
         ),
@@ -153,10 +156,7 @@ class InstructionCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
-          BoxShadow(
-            blurRadius: 20,
-            color: Colors.black.withOpacity(0.05),
-          ),
+          BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(0.05)),
         ],
       ),
       child: Column(
@@ -264,10 +264,7 @@ class StatusChip extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             label,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: color,
-            ),
+            style: TextStyle(fontWeight: FontWeight.w600, color: color),
           ),
         ],
       ),
