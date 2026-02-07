@@ -24,11 +24,18 @@ class AppColors {
   static const Color orange = Color(0xFFF59E0B);
   static const Color green = Color(0xFF10B981);
   static const Color gray = Color(0xFF9CA3AF);
+  static const Color grey = Color(0xFF9CA3AF); // Alias
   static const Color white = Color(0xFFFFFFFF);
   static const Color lightBlack = Color(0x0A000000);
   static const Color lightGray = Color(0xFFF3F4F6);
+  static const Color lightGrey = Color(0xFFF3F4F6); // Alias
   static const Color black = Color(0xFF000000);
   static const Color whiteText = Colors.white70;
+
+  // Risk level colors
+  static const Color riskHigh = Color(0xFFDC2626);
+  static const Color riskMedium = Color(0xFFF59E0B);
+  static const Color riskLow = Color(0xFF10B981);
 
   static const Color successGreen = Color(0xFF22C55E);
   static const Color dangerRed = Color(0xFFF97316);

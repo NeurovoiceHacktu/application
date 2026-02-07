@@ -20,4 +20,12 @@ class HomeViewModel {
   void openDetails(BuildContext context) {
     Navigator.of(context, rootNavigator: true).pushNamed('/history');
   }
+
+  void openCaregiverDashboard(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).pushNamed('/caregiver_dashboard');
+  }
+
+  void openDoctorDashboard(BuildContext context) {
+    Navigator.of(context, rootNavigator: true).pushNamed('/doctor_dashboard');
+  }
 }

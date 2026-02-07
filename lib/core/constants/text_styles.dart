@@ -13,6 +13,11 @@ class AppTextStyles {
     color: AppColors.textSecondary,
   );
 
+  static const subtitleSmall = TextStyle(
+    fontSize: 14,
+    color: AppColors.textSecondary,
+  );
+
   static const cardTitle = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,

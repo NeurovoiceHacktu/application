@@ -101,7 +101,7 @@ class HistoryView extends StatelessWidget {
             itemBuilder: (_, index) {
               final item = results[index];
 
-              final String testType = item['type']; // face | voice
+              final String testType = item['type']; // face | voice | tremor
               final String riskLevel = item['level'];
               final double riskScore = (item['score'] as num).toDouble();
 
@@ -158,6 +158,16 @@ class HistoryView extends StatelessWidget {
                         "Jitter: ${(features['jitter'] as num?)?.toStringAsFixed(3) ?? '--'} • "
                         "Shimmer: ${(features['shimmer'] as num?)?.toStringAsFixed(3) ?? '--'} • "
                         "Pitch: ${(features['pitch'] as num?)?.toStringAsFixed(1) ?? '--'}",
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ],
+
+                    // -------- TREMOR METRICS --------
+                    if (testType == 'tremor') ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        "Frequency: ${(item['tremorFrequency'] ?? item['tremor_frequency'] ?? 0).toStringAsFixed(1)} Hz • "
+                        "Severity: ${item['severityScore'] ?? item['severity_score'] ?? 0}/100",
                         style: const TextStyle(fontSize: 12),
                       ),
                     ],

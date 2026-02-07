@@ -1,5 +1,6 @@
 import 'package:application/core/constants/strings.dart';
 import 'package:application/core/constants/text_styles.dart';
+import 'package:application/core/constants/colors.dart';
 import 'package:application/shared/widgets/conversation_card.dart';
 import 'package:application/shared/widgets/daily_tip_card.dart';
 import 'package:application/shared/widgets/face_test_card.dart';
@@ -42,7 +43,36 @@ class HomeView extends StatelessWidget {
 
           TremorTestCard(onTap: () => viewModel.startTremorTest(context)),
           const SizedBox(height: 20),
+          // Dashboards Section
+          const Text("Dashboards", style: AppTextStyles.cardTitle),
+          const SizedBox(height: 12),
 
+          Row(
+            children: [
+              Expanded(
+                child: _buildDashboardCard(
+                  context,
+                  'Caregiver',
+                  'Patient monitoring',
+                  Icons.health_and_safety,
+                  AppColors.primaryVoice,
+                  () => viewModel.openCaregiverDashboard(context),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildDashboardCard(
+                  context,
+                  'Doctor',
+                  'Clinical analysis',
+                  Icons.medical_information,
+                  AppColors.primaryTremor,
+                  () => viewModel.openDoctorDashboard(context),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
           // const Text("Overview", style: AppTextStyles.cardTitle),
           // const SizedBox(height: 12),
 
@@ -50,6 +80,51 @@ class HomeView extends StatelessWidget {
           // const SizedBox(height: 16),
           DailyTipCard(tip: AppStrings.dailyTip),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDashboardCard(
+    BuildContext context,
+    String title,
+    String subtitle,
+    IconData icon,
+    Color color,
+    VoidCallback onTap,
+  ) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: color, width: 2),
+        ),
+        child: Column(
+          children: [
+            Icon(icon, color: color, size: 36),
+            const SizedBox(height: 8),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: color,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              subtitle,
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textSecondary,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -26,6 +26,10 @@ class _FacialCheckViewState extends State<FacialCheckView> {
   // 🔗 Backend API (CHANGE TO YOUR RENDER URL)
   static const String backendUrl =
       'https://neurovoice-db.onrender.com/api/face-results';
+  
+  // 🔗 Local backend for dashboard data aggregation
+  static const String localBackendUrl =
+      'http://192.168.1.100:5000/api/facial/result'; // UPDATE WITH YOUR IP
 
   @override
   void initState() {
@@ -85,22 +89,54 @@ class _FacialCheckViewState extends State<FacialCheckView> {
 
   // ---------- SEND RESULT TO BACKEND ----------
   Future<void> _sendFaceResultToBackend(FacialResult result) async {
-    final response = await http.post(
-      Uri.parse(backendUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'userId': 'demo-user', // TODO: replace with real user id later
-        'percentage': result.percentage,
-        'level': result.level,
-        'blinkRate': result.blinkRate,
-        'motion': result.motion,
-        'asymmetry': result.asymmetry,
-      }),
-    );
+    final resultData = {
+      'userId': 'demo-user', // TODO: replace with real user id later
+      'percentage': result.percentage,
+      'level': result.level,
+      'blinkRate': result.blinkRate,
+      'motion': result.motion,
+      'asymmetry': result.asymmetry,
+      'timestamp': DateTime.now().toIso8601String(),
+    };
 
-    if (response.statusCode != 201) {
-      debugPrint('❌ Failed to send result: ${response.body}');
-      throw Exception('Failed to store facial result');
+    // Send to original backend (for record keeping)
+    try {
+      final response = await http.post(
+        Uri.parse(backendUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(resultData),
+      );
+
+      if (response.statusCode != 201) {
+        debugPrint('⚠️ Original backend save failed: ${response.statusCode}');
+      } else {
+        debugPrint('✅ Saved to original backend');
+      }
+    } catch (e) {
+      debugPrint('⚠️ Original backend error: $e');
+    }
+
+    // ALSO send to local backend (for dashboard data)
+    try {
+      final localResponse = await http.post(
+        Uri.parse(localBackendUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'percentage': result.percentage,
+          'level': result.level,
+          'blinkRate': result.blinkRate,
+          'motion': result.motion,
+          'asymmetry': result.asymmetry,
+          'timestamp': DateTime.now().toIso8601String(),
+        }),
+      ).timeout(const Duration(seconds: 3));
+
+      if (localResponse.statusCode == 200) {
+        debugPrint('✅ Saved to local backend for dashboards');
+      }
+    } catch (e) {
+      debugPrint('⚠️ Local backend not reachable (dashboards may show old data): $e');
+      // Don't throw - local backend is optional for core functionality
     }
   }
 

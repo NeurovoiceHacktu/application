@@ -6,6 +6,11 @@ import '../../features/onboarding/onboarding_view.dart';
 import '../../features/voice_check/voice_check_view.dart';
 import '../../features/processing/voice_processing_view.dart';
 import '../../features/results/results_view.dart';
+import '../../features/tremor_check/tremor_check_view.dart';
+import '../../features/tremor_check/tremor_processing_view.dart';
+import '../../features/tremor_check/tremor_results_view.dart';
+import '../../features/caregiver/caregiver_dashboard_view.dart';
+import '../../features/doctor/doctor_dashboard_view.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -29,11 +34,20 @@ class AppRouter {
       case '/history':
         return MaterialPageRoute(builder: (_) => HistoryView());
       case '/face':
-        // Placeholder for Face Test View
         return MaterialPageRoute(builder: (_) => const FacialCheckView());
       case '/tremor':
-        // Placeholder for Tremor Test View
-        return MaterialPageRoute(builder: (_) => const Placeholder());
+        return MaterialPageRoute(builder: (_) => const TremorCheckView());
+      case '/tremor_processing':
+        return MaterialPageRoute(builder: (_) => const TremorProcessingView());
+      case '/tremor_results':
+        return MaterialPageRoute(
+          builder: (_) => const TremorResultsView(),
+          settings: settings,
+        );
+      case '/caregiver_dashboard':
+        return MaterialPageRoute(builder: (_) => const CaregiverDashboardView());
+      case '/doctor_dashboard':
+        return MaterialPageRoute(builder: (_) => const DoctorDashboardView());
       default:
         return MaterialPageRoute(builder: (_) => const OnboardingView());
     }

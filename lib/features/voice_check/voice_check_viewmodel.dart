@@ -51,6 +51,10 @@ class VoiceCheckViewModel extends ChangeNotifier {
   /// ===============================
   static const String backendUrl =
       'https://neurovoice-db.onrender.com/api/voice-results';
+  
+  // Local backend for dashboard data aggregation
+  static const String localBackendUrl =
+      'http://192.168.1.100:5000/api/voice/result'; // UPDATE WITH YOUR IP
 
   static const String userId = 'demo-user'; // replace after auth
 
@@ -186,18 +190,51 @@ class VoiceCheckViewModel extends ChangeNotifier {
   }
 
   Future<void> _sendVoiceResultToBackend() async {
-    final response = await http.post(
-      Uri.parse(backendUrl),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'userId': userId,
-        'riskScore': confidence, // 0–1
-        'riskLevel': riskLevel,
-        'features': {'ac': ac, 'nth': nth, 'htn': htn, 'updrs': updrs},
-      }),
-    );
+    final resultData = {
+      'userId': userId,
+      'riskScore': confidence, // 0–1
+      'riskLevel': riskLevel,
+      'features': {'ac': ac, 'nth': nth, 'htn': htn, 'updrs': updrs},
+      'timestamp': DateTime.now().toIso8601String(),
+    };
 
-    if (response.statusCode != 201) {
+    // Send to original backend (for record keeping)
+    try {
+      final response = await http.post(
+        Uri.parse(backendUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(resultData),
+      );
+
+      if (response.statusCode != 201) {
+        debugPrint('⚠️ Original backend save failed: ${response.statusCode}');
+      } else {
+        debugPrint('✅ Saved to original backend');
+      }
+    } catch (e) {
+      debugPrint('⚠️ Original backend error: $e');
+    }
+
+    // ALSO send to local backend (for dashboard data)
+    try {
+      final localResponse = await http.post(
+        Uri.parse(localBackendUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'risk_score': confidence,
+          'risk_level': riskLevel,
+          'timestamp': DateTime.now().toIso8601String(),
+        }),
+      ).timeout(const Duration(seconds: 3));
+
+      if (localResponse.statusCode == 200) {
+        debugPrint('✅ Saved to local backend for dashboards');
+      }
+    } catch (e) {
+      debugPrint('⚠️ Local backend not reachable (dashboards may show old data): $e');
+      // Don't throw - local backend is optional for core functionality
+    }
+  }
       throw Exception('Failed to save voice result');
     }
   }
