@@ -1,5 +1,5 @@
-import 'package:neurovoice_app/core/constants/colors.dart';
-import 'package:neurovoice_app/features/home/home_viewmodel.dart';
+import 'package:application/core/constants/colors.dart';
+import 'package:application/features/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 class StreakCard extends StatelessWidget {

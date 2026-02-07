@@ -1,9 +1,8 @@
 import 'dart:convert';
-
+import 'package:application/core/constants/colors.dart';
+import 'package:application/core/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:neurovoice_app/core/constants/colors.dart';
-import 'package:neurovoice_app/core/constants/text_styles.dart';
 
 class HistoryView extends StatelessWidget {
   const HistoryView({super.key});

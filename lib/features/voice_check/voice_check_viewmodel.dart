@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:neurovoice_app/core/network/voice_ml_api.dart';
-import 'package:neurovoice_app/core/utils/audio_helper.dart';
+import 'package:application/core/network/voice_ml_api.dart';
+import 'package:application/core/utils/audio_helper.dart';
 
 /// ===============================
 /// Test Type Registry (Extensible)
@@ -102,17 +102,14 @@ class VoiceCheckViewModel extends ChangeNotifier {
     _isRecording = true;
 
     _recordingTimer?.cancel();
-    _recordingTimer = Timer.periodic(
-      const Duration(seconds: 1),
-      (timer) async {
-        if (remainingSeconds <= 0) {
-          await stopRecording();
-        } else {
-          remainingSeconds--;
-          notifyListeners();
-        }
-      },
-    );
+    _recordingTimer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+      if (remainingSeconds <= 0) {
+        await stopRecording();
+      } else {
+        remainingSeconds--;
+        notifyListeners();
+      }
+    });
   }
 
   Future<void> stopRecording() async {
@@ -144,19 +141,18 @@ class VoiceCheckViewModel extends ChangeNotifier {
     try {
       // Progress animation
       _progressTimer?.cancel();
-      _progressTimer = Timer.periodic(
-        const Duration(milliseconds: 300),
-        (timer) {
-          if (!isUploading || _disposed) {
-            timer.cancel();
-            return;
-          }
-          if (processProgress < 0.9) {
-            processProgress += 0.03;
-            notifyListeners();
-          }
-        },
-      );
+      _progressTimer = Timer.periodic(const Duration(milliseconds: 300), (
+        timer,
+      ) {
+        if (!isUploading || _disposed) {
+          timer.cancel();
+          return;
+        }
+        if (processProgress < 0.9) {
+          processProgress += 0.03;
+          notifyListeners();
+        }
+      });
 
       final response = await VoiceMlApi.uploadWav(
         wavPath: recordedFilePath!,
@@ -197,12 +193,7 @@ class VoiceCheckViewModel extends ChangeNotifier {
         'userId': userId,
         'riskScore': confidence, // 0–1
         'riskLevel': riskLevel,
-        'features': {
-          'ac': ac,
-          'nth': nth,
-          'htn': htn,
-          'updrs': updrs,
-        },
+        'features': {'ac': ac, 'nth': nth, 'htn': htn, 'updrs': updrs},
       }),
     );
 

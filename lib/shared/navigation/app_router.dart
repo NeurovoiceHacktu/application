@@ -1,6 +1,6 @@
-import 'package:neurovoice_app/features/facial_check/facial_check_view.dart';
-import 'package:neurovoice_app/features/history/history_view.dart';
-import 'package:neurovoice_app/features/shell/main_shell_view.dart';
+import 'package:application/features/facial_check/facial_check_view.dart';
+import 'package:application/features/history/history_view.dart';
+import 'package:application/features/shell/main_shell_view.dart';
 import 'package:flutter/material.dart';
 import '../../features/onboarding/onboarding_view.dart';
 import '../../features/voice_check/voice_check_view.dart';

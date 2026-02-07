@@ -1,8 +1,8 @@
-import 'package:neurovoice_app/features/history/history_view.dart';
-import 'package:neurovoice_app/features/profile/profile_view.dart';
+import 'package:application/features/history/history_view.dart';
+import 'package:application/features/profile/profile_view.dart';
 import 'package:flutter/material.dart';
-import 'package:neurovoice_app/core/constants/colors.dart';
-import 'package:neurovoice_app/features/home/home_view.dart';
+import 'package:application/core/constants/colors.dart';
+import 'package:application/features/home/home_view.dart';
 
 class MainShellView extends StatefulWidget {
   const MainShellView({super.key});

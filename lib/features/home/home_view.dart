@@ -1,10 +1,10 @@
-import 'package:neurovoice_app/core/constants/strings.dart';
-import 'package:neurovoice_app/core/constants/text_styles.dart';
-import 'package:neurovoice_app/shared/widgets/daily_tip_card.dart';
-import 'package:neurovoice_app/shared/widgets/face_test_card.dart';
-import 'package:neurovoice_app/shared/widgets/streak_card.dart';
-import 'package:neurovoice_app/shared/widgets/tremor_test_card.dart';
-import 'package:neurovoice_app/shared/widgets/voice_test_card.dart';
+import 'package:application/core/constants/strings.dart';
+import 'package:application/core/constants/text_styles.dart';
+import 'package:application/shared/widgets/daily_tip_card.dart';
+import 'package:application/shared/widgets/face_test_card.dart';
+import 'package:application/shared/widgets/streak_card.dart';
+import 'package:application/shared/widgets/tremor_test_card.dart';
+import 'package:application/shared/widgets/voice_test_card.dart';
 import 'package:flutter/material.dart';
 import 'home_viewmodel.dart';
 

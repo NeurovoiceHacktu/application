@@ -1,7 +1,7 @@
-import 'package:neurovoice_app/core/constants/colors.dart';
-import 'package:neurovoice_app/core/constants/strings.dart';
-import 'package:neurovoice_app/features/voice_check/voice_check_viewmodel.dart';
-import 'package:neurovoice_app/shared/widgets/did_you_know_card.dart';
+import 'package:application/core/constants/colors.dart';
+import 'package:application/core/constants/strings.dart';
+import 'package:application/features/voice_check/voice_check_viewmodel.dart';
+import 'package:application/shared/widgets/did_you_know_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

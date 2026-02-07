@@ -1,6 +1,6 @@
-import 'package:neurovoice_app/core/constants/assets.dart';
-import 'package:neurovoice_app/core/constants/colors.dart';
-import 'package:neurovoice_app/core/constants/strings.dart';
+import 'package:application/core/constants/assets.dart';
+import 'package:application/core/constants/colors.dart';
+import 'package:application/core/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'onboarding_viewmodel.dart';
 
