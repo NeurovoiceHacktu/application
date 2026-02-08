@@ -74,7 +74,7 @@ class TremorCheckView extends StatelessWidget {
       height: 200,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: viewModel.isRecording 
+        color: viewModel.isRecording
             ? AppColors.primaryTremor.withOpacity(0.2)
             : AppColors.lightGrey,
       ),
@@ -82,7 +82,7 @@ class TremorCheckView extends StatelessWidget {
         child: Icon(
           Icons.vibration,
           size: 80,
-          color: viewModel.isRecording 
+          color: viewModel.isRecording
               ? AppColors.primaryTremor
               : AppColors.grey,
         ),
@@ -102,15 +102,15 @@ class TremorCheckView extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 16),
-        const Text(
-          'Hold steady...',
-          style: AppTextStyles.subtitle,
-        ),
+        const Text('Hold steady...', style: AppTextStyles.subtitle),
       ],
     );
   }
 
-  Widget _buildStartButton(BuildContext context, TremorCheckViewModel viewModel) {
+  Widget _buildStartButton(
+    BuildContext context,
+    TremorCheckViewModel viewModel,
+  ) {
     return Column(
       children: [
         ElevatedButton(
@@ -119,10 +119,7 @@ class TremorCheckView extends StatelessWidget {
             // Navigate to processing screen after recording completes
             Future.delayed(const Duration(seconds: 11), () {
               if (context.mounted) {
-                Navigator.pushReplacementNamed(
-                  context,
-                  '/tremor_processing',
-                );
+                Navigator.pushReplacementNamed(context, '/tremor_processing');
               }
             });
           },

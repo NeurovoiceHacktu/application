@@ -45,7 +45,9 @@ class AppRouter {
           settings: settings,
         );
       case '/caregiver_dashboard':
-        return MaterialPageRoute(builder: (_) => const CaregiverDashboardView());
+        return MaterialPageRoute(
+          builder: (_) => const CaregiverDashboardView(),
+        );
       case '/doctor_dashboard':
         return MaterialPageRoute(builder: (_) => const DoctorDashboardView());
       default:

@@ -138,7 +138,8 @@ class TremorCheckViewModel extends ChangeNotifier {
         recommendations = List<String>.from(data['recommendations'] ?? []);
         modelUsed = data['model_used'] ?? 'Unknown';
 
-        print('✅ Analysis complete: $riskLevel with ${confidence.toString()}% confidence',
+        print(
+          '✅ Analysis complete: $riskLevel with ${confidence.toString()}% confidence',
         );
         print('   Model used: $modelUsed');
 
@@ -174,23 +175,25 @@ class TremorCheckViewModel extends ChangeNotifier {
     }
 
     try {
-      final response = await http.post(
-        Uri.parse(databaseBackendUrl),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'userId': userId,
-          'type': 'tremor',
-          'level': riskLevel,
-          'score': confidence,
-          'riskLevel': riskLevel,
-          'confidence': confidence,
-          'tremorFrequency': tremorFrequency ?? 0.0,
-          'severityScore': severityScore ?? 0,
-          'recommendations': recommendations,
-          'modelUsed': modelUsed ?? 'Unknown',
-          'timestamp': DateTime.now().toIso8601String(),
-        }),
-      ).timeout(const Duration(seconds: 5));
+      final response = await http
+          .post(
+            Uri.parse(databaseBackendUrl),
+            headers: {'Content-Type': 'application/json'},
+            body: jsonEncode({
+              'userId': userId,
+              'type': 'tremor',
+              'level': riskLevel,
+              'score': confidence,
+              'riskLevel': riskLevel,
+              'confidence': confidence,
+              'tremorFrequency': tremorFrequency ?? 0.0,
+              'severityScore': severityScore ?? 0,
+              'recommendations': recommendations,
+              'modelUsed': modelUsed ?? 'Unknown',
+              'timestamp': DateTime.now().toIso8601String(),
+            }),
+          )
+          .timeout(const Duration(seconds: 5));
 
       if (response.statusCode == 201 || response.statusCode == 200) {
         print('✅ Tremor results saved to database');
