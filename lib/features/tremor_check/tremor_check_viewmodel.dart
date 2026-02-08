@@ -132,7 +132,7 @@ class TremorCheckViewModel extends ChangeNotifier {
         recommendations = List<String>.from(data['recommendations'] ?? []);
         modelUsed = data['model_used'] ?? 'Unknown';
         
-        print('✅ Analysis complete: $riskLevel with ${confidence.toStringAsFixed(1)}% confidence');
+        print('✅ Analysis complete: $riskLevel with ${confidence.toString()}% confidence');
         print('   Model used: $modelUsed');
         
         // Save results to database backend
@@ -208,20 +208,20 @@ class TremorCheckViewModel extends ChangeNotifier {
     }
     
     // Determine risk level based on confidence
-    if (confidence >= 75) {
+    if (confidence! >= 75) {
       riskLevel = 'High';
-    } else if (confidence >= 60) {
+    } else if (confidence! >= 60) {
       riskLevel = 'Medium';
     } else {
       riskLevel = 'Low';
     }
     
     tremorFrequency = 4.0 + random.nextDouble() * 4; // 4-8 Hz
-    severityScore = (confidence * 0.85).toInt();
+    severityScore = (confidence! * 0.85).toInt();
     recommendations = _getRecommendations(riskLevel!);
     modelUsed = 'Fallback (Backend Unavailable)';
     
-    print('⚠️ Using fallback data: $riskLevel (${confidence.toStringAsFixed(1)}%)');
+    print('⚠️ Using fallback data: $riskLevel (${confidence!.toStringAsFixed(1)}%)');
   }
 
   double _calculateVariance(List<double> values) {

@@ -459,7 +459,7 @@ class _CaregiverDashboardViewState extends State<CaregiverDashboardView> {
   }
 
   IconData _getAlertIcon(String type) {
-    if (type.contains('Fall')) return Icons.fall_sharp;
+    if (type.contains('Fall')) return Icons.run_circle_outlined;
     if (type.contains('Medication')) return Icons.medication;
     return Icons.warning;
   }
