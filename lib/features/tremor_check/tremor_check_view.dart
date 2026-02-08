@@ -9,40 +9,37 @@ class TremorCheckView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => TremorCheckViewModel(),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.primaryTremor,
-          title: const Text('Tremor Detection'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryTremor,
+        title: const Text('Tremor Detection'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
         ),
-        body: Consumer<TremorCheckViewModel>(
-          builder: (context, viewModel, _) {
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 40),
-                    _buildInstructionCard(),
-                    const Spacer(),
-                    _buildTremorAnimation(viewModel),
-                    const SizedBox(height: 40),
-                    if (viewModel.isRecording)
-                      _buildCountdown(viewModel)
-                    else
-                      _buildStartButton(context, viewModel),
-                    const Spacer(),
-                  ],
-                ),
+      ),
+      body: Consumer<TremorCheckViewModel>(
+        builder: (context, viewModel, _) {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  const SizedBox(height: 40),
+                  _buildInstructionCard(),
+                  const Spacer(),
+                  _buildTremorAnimation(viewModel),
+                  const SizedBox(height: 40),
+                  if (viewModel.isRecording)
+                    _buildCountdown(viewModel)
+                  else
+                    _buildStartButton(context, viewModel),
+                  const Spacer(),
+                ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

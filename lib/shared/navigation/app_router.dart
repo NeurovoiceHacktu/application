@@ -8,7 +8,7 @@ import '../../features/processing/voice_processing_view.dart';
 import '../../features/results/results_view.dart';
 import '../../features/tremor_check/tremor_check_view.dart';
 import '../../features/tremor_check/tremor_processing_view.dart';
-import '../../features/tremor_check/tremor_results_view.dart';
+import '../../features/tremor_check/tremor_results_simple_view.dart';
 import '../../features/caregiver/caregiver_dashboard_view.dart';
 import '../../features/doctor/doctor_dashboard_view.dart';
 
@@ -41,7 +41,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const TremorProcessingView());
       case '/tremor_results':
         return MaterialPageRoute(
-          builder: (_) => const TremorResultsView(),
+          builder: (_) => const TremorResultsSimpleView(),
           settings: settings,
         );
       case '/caregiver_dashboard':
